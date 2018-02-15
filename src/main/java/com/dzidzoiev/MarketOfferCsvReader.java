@@ -1,6 +1,5 @@
 package com.dzidzoiev;
 
-import com.dzidzoiev.model.MarketDataItem;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
@@ -12,12 +11,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
-public class MarketDataCsvReader {
-    public List<MarketDataItem> readFile(String path) {
+public class MarketOfferCsvReader {
+    public List<MarketOffer> readFile(String path) {
         try (Reader in = new FileReader(path)) {
             final CSVParser records = new CSVParser(in, CSVFormat.DEFAULT.withHeader());
             return StreamSupport.stream(records.spliterator(), false)
-                    .map(this::toMarketDataItem)
+                    .map(this::toMarketOffer)
                     .sorted()
                     .collect(Collectors.toList());
         } catch (IOException e) {
@@ -25,8 +24,8 @@ public class MarketDataCsvReader {
         }
     }
 
-    private MarketDataItem toMarketDataItem(CSVRecord record) {
-        return new MarketDataItem(
+    private MarketOffer toMarketOffer(CSVRecord record) {
+        return new MarketOffer(
                 record.get("Lender"),
                 Double.parseDouble(record.get("Rate")),
                 Integer.parseInt(record.get("Available")));

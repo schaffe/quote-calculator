@@ -1,18 +1,16 @@
-package com.dzidzoiev.model;
+package com.dzidzoiev;
 
 import java.util.Objects;
 
-public final class MarketDataItem implements Comparable<MarketDataItem> {
+public final class MarketOffer implements Comparable<MarketOffer> {
     private final String lender;
     private final double rate;
     private final long available;
 
-    public MarketDataItem(String lender, double rate, int available) {
+    public MarketOffer(String lender, double rate, int available) {
         Objects.requireNonNull(lender);
-        if(rate >= 1 || rate <= 0)
-            throw new IllegalStateException("Rate should be in range of 0 .. 1 exclusive instead of " + rate);
-        if (available <= 0)
-            throw new IllegalStateException("Available value should be higher than 0 instead of " + available);
+        Validator.validateRate(rate);
+        Validator.validateAvailable(available);
 
         this.lender = lender;
         this.rate = rate;
@@ -36,7 +34,7 @@ public final class MarketDataItem implements Comparable<MarketDataItem> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        MarketDataItem item = (MarketDataItem) o;
+        MarketOffer item = (MarketOffer) o;
 
         if (Double.compare(item.rate, rate) != 0) return false;
         if (available != item.available) return false;
@@ -56,7 +54,7 @@ public final class MarketDataItem implements Comparable<MarketDataItem> {
 
     @Override
     public String toString() {
-        return "MarketDataItem{" +
+        return "MarketOffer{" +
                 "lender='" + lender + '\'' +
                 ", rate=" + rate +
                 ", available=" + available +
@@ -64,7 +62,7 @@ public final class MarketDataItem implements Comparable<MarketDataItem> {
     }
 
     @Override
-    public int compareTo(MarketDataItem o) {
+    public int compareTo(MarketOffer o) {
         return Double.compare(rate, o.rate);
     }
 }
