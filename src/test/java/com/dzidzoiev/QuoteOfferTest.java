@@ -1,9 +1,10 @@
 package com.dzidzoiev;
 
+import com.dzidzoiev.model.QuoteOffer;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class LoanOfferTest {
+public class QuoteOfferTest {
     @Test
     public void testToString() throws Exception {
         String expected =
@@ -11,7 +12,7 @@ public class LoanOfferTest {
                 "Rate: 0.1%\n" +
                 "Monthly repayment: £100.00\n" +
                 "Total repayment: £1000.01";
-        LoanOffer actual = new LoanOffer(1000, 0.001, 100, 1000.01);
+        QuoteOffer actual = new QuoteOffer(1000, 0.001, 100, 1000.01);
         Assert.assertEquals(expected, actual.toString());
     }
 

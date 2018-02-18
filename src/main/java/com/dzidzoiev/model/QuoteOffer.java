@@ -1,16 +1,27 @@
-package com.dzidzoiev;
+package com.dzidzoiev.model;
 
-public class LoanOffer {
+import java.math.BigDecimal;
+
+public class QuoteOffer {
     private final long requestedAmount;
     private final double rate;
     private final double monthlyRepayment;
     private final double totalRepayment;
 
-    public LoanOffer(long requestedAmount, double rate, double monthlyRepayment, double totalRepayment) {
+    public QuoteOffer(long requestedAmount, double rate, double monthlyRepayment, double totalRepayment) {
         this.requestedAmount = requestedAmount;
         this.rate = rate;
         this.monthlyRepayment = monthlyRepayment;
         this.totalRepayment = totalRepayment;
+    }
+
+    public static QuoteOffer of(long requestedAmount, BigDecimal rate, BigDecimal montlyRepayment, BigDecimal totalRepayment) {
+        return new QuoteOffer(
+                requestedAmount,
+                rate.doubleValue(),
+                montlyRepayment.doubleValue(),
+                totalRepayment.doubleValue()
+        );
     }
 
     public long getRequestedAmount() {
@@ -28,6 +39,8 @@ public class LoanOffer {
     public double getTotalRepayment() {
         return totalRepayment;
     }
+
+
 
     @Override
     public String toString() {

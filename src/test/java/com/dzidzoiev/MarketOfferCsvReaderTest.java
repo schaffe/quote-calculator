@@ -1,5 +1,6 @@
 package com.dzidzoiev;
 
+import com.dzidzoiev.model.MarketOffer;
 import org.junit.Assert;
 import org.junit.Test;
 

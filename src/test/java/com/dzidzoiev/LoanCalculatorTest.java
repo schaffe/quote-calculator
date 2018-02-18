@@ -1,43 +1,44 @@
 package com.dzidzoiev;
 
-import com.dzidzoiev.exception.InsufficientAmountOnMarketException;
+import com.dzidzoiev.model.Loan;
+import com.dzidzoiev.model.MarketOffer;
 import org.junit.Test;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class LoanCalculatorTest {
 
+    private static final BigDecimal thousand = new BigDecimal("1000");
+    private static final BigDecimal tenPercent = new BigDecimal("0.1");
 
     @Test
     public void sumOfSubloansShouldBeEqualRequestedAmount() throws Exception {
         List<MarketOffer> testSet = new ArrayList<>();
-        testSet.add(new MarketOffer("Lucy", 0.1, 1000));
-        testSet.add(new MarketOffer("Mark", 0.01, 1000));
-        testSet.add(new MarketOffer("Mark1", 0.01, 1000));
+        testSet.add(new MarketOffer("Lucy", tenPercent, thousand));
+        testSet.add(new MarketOffer("Mark", tenPercent, thousand));
+        testSet.add(new MarketOffer("Mark1", tenPercent, thousand));
 
         LoanCalculator calculator = new LoanCalculator();
-        List<LoanCalculator.Subloan> calculate = calculator.composeSubloans(1500, testSet);
+        List<Loan> calculate = calculator.composeLoans(1500, testSet);
 
         long sum = 0;
-        for (LoanCalculator.Subloan subloan : calculate) {
-            sum += subloan.amount;
+        for (Loan loan : calculate) {
+            sum += loan.getAmount().longValue();
         }
 
         assertEquals(1500, sum);
     }
 
-    @Test(expected = InsufficientAmountOnMarketException.class)
-    public void sumOfSubloansShouldThrowExceptionOnInsufficientMarket() throws Exception {
-        LoanCalculator calculator = new LoanCalculator();
-        calculator.composeSubloans(1500, Collections.emptyList());
-    }
-
     @Test
-    public void testCompoundInterestePositive() throws Exception {
-        assertEquals(1232.93d, LoanCalculator.compoundInterest(1000, 0.07), 0.01);
+    public void sumOfSubloansShouldReturnEmptyOnInsufficientMarket() throws Exception {
+        LoanCalculator calculator = new LoanCalculator();
+        List<Loan> loans = calculator.composeLoans(1500, Collections.emptyList());
+        assertTrue(loans.isEmpty());
     }
 }
