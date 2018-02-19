@@ -1,6 +1,6 @@
-package com.dzidzoiev;
+package com.dzidzoiev.quote;
 
-import com.dzidzoiev.model.MarketOffer;
+import com.dzidzoiev.quote.model.MarketOffer;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;

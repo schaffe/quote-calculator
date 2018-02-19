@@ -1,4 +1,4 @@
-package com.dzidzoiev;
+package com.dzidzoiev.quote;
 
 import java.math.BigDecimal;
 import java.math.MathContext;

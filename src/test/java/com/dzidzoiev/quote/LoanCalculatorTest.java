@@ -1,7 +1,7 @@
-package com.dzidzoiev;
+package com.dzidzoiev.quote;
 
-import com.dzidzoiev.model.Loan;
-import com.dzidzoiev.model.MarketOffer;
+import com.dzidzoiev.quote.model.Loan;
+import com.dzidzoiev.quote.model.MarketOffer;
 import org.junit.Before;
 import org.junit.Test;
 

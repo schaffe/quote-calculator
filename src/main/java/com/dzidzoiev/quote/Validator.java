@@ -1,4 +1,4 @@
-package com.dzidzoiev;
+package com.dzidzoiev.quote;
 
 public class Validator {
 

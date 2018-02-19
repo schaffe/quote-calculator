@@ -1,4 +1,4 @@
-package com.dzidzoiev.model;
+package com.dzidzoiev.quote.model;
 
 import java.math.BigDecimal;
 

@@ -1,6 +1,6 @@
-package com.dzidzoiev;
+package com.dzidzoiev.quote;
 
-import com.dzidzoiev.model.QuoteOffer;
+import com.dzidzoiev.quote.model.QuoteOffer;
 import org.junit.Before;
 import org.junit.Test;
 

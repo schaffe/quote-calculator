@@ -1,8 +1,8 @@
-package com.dzidzoiev;
+package com.dzidzoiev.quote;
 
-import com.dzidzoiev.model.Loan;
-import com.dzidzoiev.model.MarketOffer;
-import com.dzidzoiev.model.QuoteOffer;
+import com.dzidzoiev.quote.model.Loan;
+import com.dzidzoiev.quote.model.MarketOffer;
+import com.dzidzoiev.quote.model.QuoteOffer;
 
 import java.math.BigDecimal;
 import java.util.*;

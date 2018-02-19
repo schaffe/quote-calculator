@@ -1,6 +1,6 @@
-package com.dzidzoiev.model;
+package com.dzidzoiev.quote.model;
 
-import com.dzidzoiev.Validator;
+import com.dzidzoiev.quote.Validator;
 
 import java.math.BigDecimal;
 import java.util.Objects;

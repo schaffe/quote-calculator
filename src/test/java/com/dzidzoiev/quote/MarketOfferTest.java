@@ -1,6 +1,6 @@
-package com.dzidzoiev;
+package com.dzidzoiev.quote;
 
-import com.dzidzoiev.model.MarketOffer;
+import com.dzidzoiev.quote.model.MarketOffer;
 import org.junit.Test;
 
 import java.math.BigDecimal;

@@ -1,7 +1,7 @@
-package com.dzidzoiev;
+package com.dzidzoiev.quote;
 
-import com.dzidzoiev.model.MarketOffer;
-import com.dzidzoiev.model.QuoteOffer;
+import com.dzidzoiev.quote.model.MarketOffer;
+import com.dzidzoiev.quote.model.QuoteOffer;
 
 import java.util.List;
 import java.util.Optional;
@@ -23,7 +23,7 @@ class Application {
         String filePath = args[0];
 
         QuoteOffer totalOffer = application.calculate(amount, filePath)
-                .orElseThrow(() -> new QuoteException("Is not possible to provide a quote at that time. " +
+                .orElseThrow(() -> new QuoteException("It is not possible to provide a quote at that time. " +
                         "The market does not have sufficient offers from lenders to satisfy the loan."));
 
         System.out.println(totalOffer);
