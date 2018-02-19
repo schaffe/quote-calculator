@@ -1,9 +1,13 @@
+plugins {
+    id "com.github.johnrengelman.shadow" version "2.0.2"
+}
+
 apply plugin: 'java'
-apply plugin: 'application'
 
 repositories {
     jcenter()
 }
+
 
 dependencies {
     compile group: 'org.apache.commons', name: 'commons-csv', version: '1.5'
@@ -11,5 +15,8 @@ dependencies {
     testCompile 'junit:junit:4.12'
 }
 
-mainClassName = ''
-
+jar {
+    manifest {
+        attributes 'Main-Class': 'com.dzidzoiev.Launcher'
+    }
+}

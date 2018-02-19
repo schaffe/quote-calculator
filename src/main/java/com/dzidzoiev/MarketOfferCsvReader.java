@@ -13,8 +13,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
-public class MarketOfferCsvReader {
-    public List<MarketOffer> readFile(String path) {
+class MarketOfferCsvReader {
+    List<MarketOffer> readFile(String path) {
         try (Reader in = new FileReader(path)) {
             final CSVParser records = new CSVParser(in, CSVFormat.DEFAULT.withHeader());
             return StreamSupport.stream(records.spliterator(), false)

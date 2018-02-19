@@ -5,13 +5,9 @@ import com.dzidzoiev.model.MarketOffer;
 import com.dzidzoiev.model.QuoteOffer;
 
 import java.math.BigDecimal;
-import java.math.MathContext;
 import java.util.*;
 
-public class LoanCalculator {
-    private static final BigDecimal DEFAULT_LOAN_TIME_MONTH_BD = new BigDecimal("36");
-    private static final BigDecimal PAYMENTS_PER_YEAR_BD = new BigDecimal("12");
-    private static final MathContext divContext = MathContext.DECIMAL32;
+class LoanCalculator {
 
     /**
      * Calculates quote taking into account market offers and requested amount.
@@ -25,12 +21,12 @@ public class LoanCalculator {
         if(loans.isEmpty())
             return Optional.empty();
 
-        BigDecimal finalRate = weightedArithmeticMean(loans);
+        BigDecimal finalRate = calculateWeightedRate(loans);
         BigDecimal monthlyRepayment = loans.stream()
                 .map(Loan::getMonthlyRepayment)
                 .reduce(BigDecimal::add)
                 .get();
-        QuoteOffer quote = QuoteOffer.of(requested, finalRate, monthlyRepayment, monthlyRepayment.multiply(DEFAULT_LOAN_TIME_MONTH_BD));
+        QuoteOffer quote = QuoteOffer.of(requested, finalRate, monthlyRepayment, monthlyRepayment.multiply(Constants.DEFAULT_LOAN_TIME_MONTH_BD));
         return Optional.of(quote);
     }
 
@@ -75,12 +71,12 @@ public class LoanCalculator {
      * http://financeformulas.net/Loan_Payment_Formula.html
      */
     BigDecimal calculateMonthlyRepayment(BigDecimal amount, BigDecimal rate) {
-        BigDecimal monthlyRate = rate.divide(PAYMENTS_PER_YEAR_BD, divContext);
+        BigDecimal monthlyRate = rate.divide(Constants.PAYMENTS_PER_YEAR_BD, Constants.divContext);
         BigDecimal pow = BigDecimal.ONE
                 .add(monthlyRate)
-                .pow(DEFAULT_LOAN_TIME_MONTH_BD.intValue());
-        BigDecimal dividePow = BigDecimal.ONE.divide(pow, divContext);
-        return monthlyRate.multiply(amount.divide(BigDecimal.ONE.subtract(dividePow), divContext));
+                .pow(Constants.DEFAULT_LOAN_TIME_MONTH_BD.intValue());
+        BigDecimal dividePow = BigDecimal.ONE.divide(pow, Constants.divContext);
+        return monthlyRate.multiply(amount.divide(BigDecimal.ONE.subtract(dividePow), Constants.divContext));
     }
 
     /**
@@ -91,7 +87,7 @@ public class LoanCalculator {
      * contribution to the quote
      */
     @SuppressWarnings("ConstantConditions")
-    BigDecimal weightedArithmeticMean(Collection<Loan> loans) {
+    BigDecimal calculateWeightedRate(Collection<Loan> loans) {
         BigDecimal weightedSum = loans.stream()
                 .map(loan -> loan.getRate().multiply(loan.getAmount()))
                 .reduce(BigDecimal::add)
@@ -100,7 +96,7 @@ public class LoanCalculator {
                 .map(Loan::getAmount)
                 .reduce(BigDecimal::add)
                 .get();
-        return weightedSum.divide(weights, divContext);
+        return weightedSum.divide(weights, Constants.divContext);
     }
 
 }
