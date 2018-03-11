@@ -8,7 +8,7 @@ public class Launcher {
             application.run(application, args);
         } catch (QuoteException e) {
             System.err.println(e.getMessage());
-            System.exit(0);
+            System.exit(1);
         }
     }
 
