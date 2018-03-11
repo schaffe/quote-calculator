@@ -19,3 +19,5 @@ Rate: 7.0%
 Monthly repayment: £30.88
 Total repayment: £1111.64
 ```
+
+Tested on MacOS Sierra 10.12 and Debian GNU/Linux 8
